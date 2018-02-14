@@ -1,7 +1,3 @@
-Sung Jun Park  
-CS 76  
-September 20, 2017
-
 # Missionary and Cannibal
 
 ### Introduction
@@ -29,8 +25,6 @@ The total number of possible states for missionary and cannibal would be `(m+1) 
 That being said, this program implements a design, where a state can be described with a tuple of 3 elements, under a premise that boat's destinations are limited to two locations: bank_1 and bank_2. The first element (_m1_) and the second element (_c1_) capture respectively the number of missionaries and cannibals on bank_1. Accordingly, the number of missionaries and cannibals on bank_2 can be easily calculated by subtracting _m1_ and _c1_ from the the total number of missionaries and cannibals. The third element (_b_) is constrained to having two possible states -1 and 1: _b_=1 when the boat is at bank_1 and _b_=-1 when the boat is at bank_2.
 
 Throughout the run time, program actively searches for a set of possible states from its current state, and keeps on searching until it's found its way to the desired end state or discovers that there is no way of reaching one. Here is an example of the first few steps in Missionary and Cannibal Game when `m`=3, `c`=3:
-
-![States](./States.svg)
 
 The program starts at (3,3,1) and makes its way onward. That is, it first searches for every possible state that can be reached from (3,3,1), and repeats the same procedure as it moves onto its list of next states. As the diagram shows, not all possible states are legal states. That is why we have to throw a legality test for every node. For instance, in the diagram, those that are colored in red are those that do not qualify as legal states. (2,3,-1), (1,3,-1), and (2,3,1) all represent a situation where the missionaries are outnumbered by the cannibals at bank_1. In other words, the missionaries on bank_1 are going to be eaten by the cannibals, and it would be a game over. That is why, the red nodes don't have any child node (the game will come to an end before it can be led to a group of new states). On the other hand, all the green nodes (states that have passed the legality test) have at least one child node; some go straight back to where they came from, but some make their ways to new nodes that have not been visited yet. And these steps are repeated either until it makes its way to the goal state or until it has explored every possible legal state.
 
@@ -174,7 +168,6 @@ The upperbound would be, for this example, `(4 * 4 * 2) + (3 * 4 * 2) + (2 * 4 *
 
 Lossy case is further discussed in the extra credit section; I have implemented changes in order to take care of the lossy case.
 
-### Extra Credit
 1. Boat Capacity modification:  
 I made it possible to modify the number of people that can fit in the boat. Now you can have more than 2 people aboard. I made it so that if the cannibals outnumber the missionaries on the boat, the missionaries get eaten. I made a few tweaks at the instance variables of CannibalProblem and get_successor function.
 
